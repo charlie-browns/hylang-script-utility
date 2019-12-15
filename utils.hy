@@ -1,5 +1,11 @@
 
 "
+ Print and redirect an argument for debugging purpose.
+"
+(defmacro printre [arg]
+ `(do (print ~arg) ~arg))
+
+"
  Common lisp style defn macro
 "
 (defmacro defun [funcname arglist &rest body]

@@ -27,6 +27,10 @@
   (print "Test defun macro :")
   (test-defun "This is arg" "This" "is" "rest" "arg")
   (print "")
+
+  (print "Test printre macro :")
+  (print (printre "This will be shown twice"))
+  (print "")
  )
 
 
