@@ -1,5 +1,11 @@
 
 "
+ Common lisp style defn macro
+"
+(defmacro defun [funcname arglist &rest body]
+ `(defn ~funcname [~@arglist] ~@body))
+
+"
  Convert symbol list to string list
 "
 (defmacro symbols-to-strings [symbols]

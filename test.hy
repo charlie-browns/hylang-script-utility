@@ -1,6 +1,11 @@
 
 (require [utils [*]])
 
+(defun test-defun (arg &rest args)
+ (print arg)
+ (print #* args)
+ )
+
 ;; Test defmain-getopt itself.
 ;;
 ;; Try the command below:
@@ -16,8 +21,12 @@
   (print "Parsed sub commands :")
   (print comlist "\n")
 
-  ;; Test $ macro
-  (print "Show your cpu model name :")
-  (print ($ lscpu | grep -iP "model.*name")))
+  (print "Test $ macro :")
+  (print ($ lscpu | grep -iP "model.*name"))  ;; Show your cpu model name.
+  
+  (print "Test defun macro :")
+  (test-defun "This is arg" "This" "is" "rest" "arg")
+  (print "")
+ )
 
 
