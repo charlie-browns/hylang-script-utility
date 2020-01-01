@@ -1,0 +1,12 @@
+__pycache__/
+.coverage
+*.log
+*.pyc
+*~
+*.orig
+*.rej
+*.swp
+._*
+\#*
+.\#*
+nosetests.xml

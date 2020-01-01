@@ -25,11 +25,11 @@
   (print ($ lscpu | grep -iP "model.*name"))  ;; Show your cpu model name.
   
   (print "Test defun macro :")
-  (test-defun "This is arg" "This" "is" "rest" "arg")
+  (test-defun "This is an arg ." "This" "is" "a" "rest" "arg" ".")
   (print "")
 
   (print "Test printre macro :")
-  (print (printre "This will be shown twice"))
+  (print (printre "This will be shown twice."))
   (print "")
  )
 
