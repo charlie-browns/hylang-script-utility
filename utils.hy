@@ -23,9 +23,9 @@
 (defmacro defmain-getopt [s l lout &rest body]
  `(defmain [&rest args]
    (import getopt)
-   (setv ls (symbols-to-strings ~s))
-   (setv ll (symbols-to-strings ~l))
-   (setv opt (.getopt getopt (cut args 1) (.join "" ls) ll))
+   (setv ls (symbols-to-strings ~s)
+         ll (symbols-to-strings ~l)
+         opt (.getopt getopt (cut args 1) (.join "" ls) ll))
    ((fn [~@lout] ~@body) (dict (get opt 0)) #* (get opt 1))))
 
 "
