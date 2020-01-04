@@ -1,4 +1,5 @@
 
+(import [utils [*]])
 (require [utils [*]])
 
 (defun test-defun (arg &rest args)
@@ -28,7 +29,8 @@
   (test-defun "This is an arg ." "This" "is" "a" "rest" "arg" ".")
   (print "")
 
-  (print "Test printre macro :")
+  (print "Test printre :")
+  (printre "This will be shown once.")
   (print (printre "This will be shown twice."))
   (print "")
  )
