@@ -1,4 +1,6 @@
 
+(require [hy.contrib.walk [let]])
+
 "
  Print and redirect an argument for debugging purpose.
 "
@@ -9,7 +11,7 @@
  Convert symbol list to string list
 "
 (defmacro symbols-to-strings [symbols]
- `(lfor s '~symbols (string s)))
+ `(lfor s '~symbols (str s)))
 
 "
  Macro defmain with args that python's getopt parsed.
