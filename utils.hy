@@ -1,5 +1,8 @@
 
 (require [hy.contrib.walk [let]])
+(import os
+        getopt
+        subprocess)
 
 "
  Print and redirect an argument for debugging purpose.
@@ -18,7 +21,6 @@
 "
 (defmacro defmain-getopt [s l lout &rest body]
  `(defmain [&rest args]
-    (import getopt)
     (let [opt (getopt.getopt 
                 (cut args 1)
                 (.join "" (sym2str ~s))
@@ -31,7 +33,6 @@
 "
 (defmacro $ [&rest cmd]
  `(do
-    (import subprocess)
     (let [cmdlist (sym2str ~cmd)]
       (subprocess.check_output 
         (.join " " cmdlist)
@@ -45,4 +46,20 @@
     (for [f files]
       ((fn [~name-of-root-path ~name-of-file-path] ~@body) root f))))
 
+"
+ Wrappers for os.path
+"
+(defn p/join [path &rest paths]
+  (os.path.join path #* paths))
 
+(defn p/abs [path]
+  (os.path.abspath path))
+
+(defn p/rel [path &optional [start os.curdir]]
+  (os.path.relpath path :start start))
+
+(defn p/norm [path]
+  (os.path.normpath path))
+
+(defn p/real [path]
+  (os.path.realpath path))

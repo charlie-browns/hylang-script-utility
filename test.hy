@@ -1,7 +1,6 @@
 
 (import [utils [*]])
 (require [utils [*]])
-(import os)
 
 ;; Test defmain-getopt itself.
 ;;
@@ -26,9 +25,25 @@
   (print (printre "This will be shown twice."))
   (print "")
 
-  (print "Test for-dir :")
+  (print "Test p/join :")
+  (print (p/join "hello" "world"))
+
+  (print "Test p/abs :")
+  (print (p/abs "./"))
+
+  (print "Test p/rel :")
+  (print (p/rel "./" :start "/usr/local"))
+
+  (print "Test p/norm :")
+  (print (p/norm ".///////.git"))
+
+  (print "Test p/real :")
+  (print (p/real "./sym_link_test.c"))
+
+  (print "Test for-dir ---------------------------------------------------")
   (for-dir "./" root-path file-name
-    (print (os.path.join root-path file-name)))
+    (print (p/join root-path file-name)))
+  (print "end Test for-dir -----------------------------------------------")
  )
 
 
