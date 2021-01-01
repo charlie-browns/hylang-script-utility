@@ -1,2 +1,4 @@
-# hylang-script-utility
-Utility macros and functions for writing script in hylang.
+# hy-utils
+
+Welcome to hy-utils.
+This project is WIP, but at least for me, convenient to do something in hylang.
