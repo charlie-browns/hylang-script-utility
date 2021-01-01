@@ -31,9 +31,18 @@
 "
 (defmacro $ [&rest cmd]
  `(do
+    (import subprocess)
     (let [cmdlist (sym2str ~cmd)]
-      (import subprocess)
       (subprocess.check_output 
         (.join " " cmdlist)
         :shell True))))
+
+"
+ Walk given dir to do something for files in it
+"
+(defmacro for-dir [path-to-dir name-of-root-path name-of-file-path &rest body]
+ `(for [[root dirs files] (os.walk ~path-to-dir)]
+    (for [f files]
+      ((fn [~name-of-root-path ~name-of-file-path] ~@body) root f))))
+
 

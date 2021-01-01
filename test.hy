@@ -1,6 +1,7 @@
 
 (import [utils [*]])
 (require [utils [*]])
+(import os)
 
 ;; Test defmain-getopt itself.
 ;;
@@ -24,6 +25,10 @@
   (printre "This will be shown once.")
   (print (printre "This will be shown twice."))
   (print "")
+
+  (print "Test for-dir :")
+  (for-dir "./" root-path file-name
+    (print (os.path.join root-path file-name)))
  )
 
 
