@@ -1,6 +1,8 @@
 
-(import [utils [*]])
-(require [utils [*]])
+(import [src.utils [*]])
+(import re)
+(require [src.utils [*]])
+(require [hy.contrib.walk [let]])
 
 ;; Test defmain-getopt itself.
 ;;
@@ -9,41 +11,37 @@
 (defmain-getopt (a b:) 
                 (longoption longoption-with-arg=)
                 [optdict &rest comlist]
-  (print "")
 
-  (print "Parsed options :")
-  (print optdict "\n")
+  (assert (= (printre "Test result:") "Test result:"))
 
-  (print "Parsed sub commands :")
-  (print comlist "\n")
+  (let [out ($ lscpu | grep -iP "model.*name")]
+    (let [match (re.search "Model name:.*" out)]
+      (assert (!= match None))))
 
-  (print "Test $ macro :")
-  (print ($ lscpu | grep -iP "model.*name"))  ;; Show your cpu model name.
-  
-  (print "Test printre :")
-  (printre "This will be shown once.")
-  (print (printre "This will be shown twice."))
-  (print "")
+  (assert 
+    (= (p/join "hello" "world")
+    "hello/world"))
 
-  (print "Test p/join :")
-  (print (p/join "hello" "world"))
+  (assert
+    (= (p/abs "./test.hy")
+    (os.path.abspath "./test.hy")))
 
-  (print "Test p/abs :")
-  (print (p/abs "./"))
+  (assert
+    (= (p/rel "./test.hy" :start "./test")
+    (os.path.relpath "./test.hy" :start "./test")))
 
-  (print "Test p/rel :")
-  (print (p/rel "./" :start "/usr/local"))
+  (assert
+    (= (p/norm ".//.//.///test//.//") 
+    "test"))
 
-  (print "Test p/norm :")
-  (print (p/norm ".///////.git"))
+  (assert
+    (= (p/real "./test/sub_0/symlink_to_test.hy")
+    (os.path.abspath "./test.hy")))
 
-  (print "Test p/real :")
-  (print (p/real "./sym_link_test.c"))
+  (for-dir "./test" root-path file-name
+    (let [match (re.search "\./test/sub_\d/\w+\..+" (p/join root-path file-name))]
+      (assert (!= match None))))
 
-  (print "Test for-dir ---------------------------------------------------")
-  (for-dir "./" root-path file-name
-    (print (p/join root-path file-name)))
-  (print "end Test for-dir -----------------------------------------------")
- )
+  (print "ALL OK"))
 
 

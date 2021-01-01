@@ -34,9 +34,8 @@
 (defmacro $ [&rest cmd]
  `(do
     (let [cmdlist (sym2str ~cmd)]
-      (subprocess.check_output 
-        (.join " " cmdlist)
-        :shell True))))
+      (-> (subprocess.check_output 
+        (.join " " cmdlist) :shell True) (.decode)))))
 
 "
  Walk given dir to do something for files in it
