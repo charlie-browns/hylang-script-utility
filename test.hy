@@ -12,30 +12,30 @@
                 (longoption longoption-with-arg=)
                 [optdict &rest comlist]
 
-  (test/eq (printre "Test result:")
-           "Test result:")
+  (assert/= (printre "Test result:")
+            "Test result:")
 
-  (test/eq ($ pwd)
-           (+ (os.getcwd) "\n"))
+  (assert/= ($ pwd)
+            (+ (os.getcwd) "\n"))
 
-  (test/eq (p/join "hello" "world")
-           "hello/world")
+  (assert/= (p/join "hello" "world")
+            "hello/world")
 
-  (test/eq (p/abs "./test.hy")
-           (os.path.abspath "./test.hy"))
+  (assert/= (p/abs "./test.hy")
+            (os.path.abspath "./test.hy"))
 
-  (test/eq (p/rel "./test.hy" :start "./test")
-           (os.path.relpath "./test.hy" :start "./test"))
+  (assert/= (p/rel "./test.hy" :start "./test")
+            (os.path.relpath "./test.hy" :start "./test"))
 
-  (test/eq (p/norm ".//.//.///test//.//") 
-           "test")
+  (assert/= (p/norm ".//.//.///test//.//") 
+            "test")
 
-  (test/eq (p/real "./test/sub_0/symlink_to_test.hy")
-           (os.path.realpath "./test.hy"))
+  (assert/= (p/real "./test/sub_0/symlink_to_test.hy")
+            (os.path.realpath "./test.hy"))
 
   (for-dir "./test" root file-name
     (let [match (re.search "\./test/sub_\d/\w+\..+" (p/join root file-name))]
-      (test/neq match None)))
+      (assert/!= match None)))
 
   (print "ALL OK"))
 
