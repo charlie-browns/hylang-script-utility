@@ -11,6 +11,15 @@
   (do (print arg) arg))
 
 "
+ Wrap assert for test
+"
+(defn test/eq [arg1 arg2]
+  (assert (= arg1 arg2)))
+
+(defn test/neq [arg1 arg2]
+  (assert (!= arg1 arg2)))
+
+"
  Convert symbol list to string list
 "
 (defmacro sym2str [sym]

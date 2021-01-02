@@ -12,35 +12,30 @@
                 (longoption longoption-with-arg=)
                 [optdict &rest comlist]
 
-  (assert (= (printre "Test result:") "Test result:"))
+  (test/eq (printre "Test result:")
+           "Test result:")
 
-  (let [out ($ lscpu | grep -iP "model.*name")]
-    (let [match (re.search "Model name:.*" out)]
-      (assert (!= match None))))
+  (test/eq ($ pwd)
+           (+ (os.getcwd) "\n"))
 
-  (assert 
-    (= (p/join "hello" "world")
-    "hello/world"))
+  (test/eq (p/join "hello" "world")
+           "hello/world")
 
-  (assert
-    (= (p/abs "./test.hy")
-    (os.path.abspath "./test.hy")))
+  (test/eq (p/abs "./test.hy")
+           (os.path.abspath "./test.hy"))
 
-  (assert
-    (= (p/rel "./test.hy" :start "./test")
-    (os.path.relpath "./test.hy" :start "./test")))
+  (test/eq (p/rel "./test.hy" :start "./test")
+           (os.path.relpath "./test.hy" :start "./test"))
 
-  (assert
-    (= (p/norm ".//.//.///test//.//") 
-    "test"))
+  (test/eq (p/norm ".//.//.///test//.//") 
+           "test")
 
-  (assert
-    (= (p/real "./test/sub_0/symlink_to_test.hy")
-    (os.path.abspath "./test.hy")))
+  (test/eq (p/real "./test/sub_0/symlink_to_test.hy")
+           (os.path.realpath "./test.hy"))
 
-  (for-dir "./test" root-path file-name
-    (let [match (re.search "\./test/sub_\d/\w+\..+" (p/join root-path file-name))]
-      (assert (!= match None))))
+  (for-dir "./test" root file-name
+    (let [match (re.search "\./test/sub_\d/\w+\..+" (p/join root file-name))]
+      (test/neq match None)))
 
   (print "ALL OK"))
 
