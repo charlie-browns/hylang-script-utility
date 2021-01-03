@@ -28,14 +28,14 @@
 "
  Macro defmain with args that python's getopt parsed.
 "
-(defmacro defmain-getopt [s l lout &rest body]
+(defmacro defmain-getopt [short long dic lst &rest body]
  `(defmain [&rest args]
     (let [opt (getopt.getopt 
                 (cut args 1)
-                (.join "" (sym2str ~s))
-                (sym2str ~l))]
-      ((fn [~@lout] ~@body)
-        (dict (get opt 0)) #* (get opt 1)))))
+                (.join "" (sym2str ~short))
+                (sym2str ~long))]
+      ((fn [~dic ~lst] ~@body)
+        (dict (get opt 0)) (get opt 1)))))
 
 "
  Shell macro that wraps subprocess

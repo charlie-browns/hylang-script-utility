@@ -8,9 +8,12 @@
 ;;
 ;; Try the command below:
 ;; $ hy test.hy -a -b shortoptarg --longoption --longoption-with-arg=longoptarg subcommand1 subcommand2
-(defmain-getopt (a b:) 
+(defmain-getopt (a b:)
                 (longoption longoption-with-arg=)
-                [optdict &rest comlist]
+                optdict comlist
+
+  (when (!= (len optdict) 0) (print "Options     :" optdict))
+  (when (!= (len comlist) 0) (print "Sub commands:" comlist))
 
   (assert/= (printre "Test result:")
             "Test result:")
