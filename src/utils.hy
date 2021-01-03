@@ -35,7 +35,7 @@
                 (.join "" (sym2str ~short))
                 (sym2str ~long))]
       ((fn [~dic ~lst] ~@body)
-        (dict (get opt 0)) (get opt 1)))))
+        (dict (get opt 0)) (list (get opt 1))))))
 
 "
  Shell macro that wraps subprocess

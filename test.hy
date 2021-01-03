@@ -12,8 +12,11 @@
                 (longoption longoption-with-arg=)
                 optdict comlist
 
-  (when (!= (len optdict) 0) (print "Options     :" optdict))
-  (when (!= (len comlist) 0) (print "Sub commands:" comlist))
+  (when (!= (len optdict) 0)
+    (print "Options     :" optdict))
+
+  (when (!= (len comlist) 0)
+    (print "Sub commands:" comlist))
 
   (assert/= (printre "Test result:")
             "Test result:")
